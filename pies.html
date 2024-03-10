@@ -26,7 +26,7 @@
                     <img src="images/apple-pie.png" alt="Apple Pie">
                 <div class="columns">
                     <div class="title">Apple Pie</div>
-                    <div class="price">12.95</div>
+                    <div class="price">$12.95</div>
                 </div>
                 <p class="desc">Our famous apple pie</p>
                 <button data-order="appe-pie">Order</button>
@@ -53,4 +53,30 @@
             </nav>
         </footer>
     </body>
+    <script>
+        window.addEventListener("DOMContentLoaded", function(e) {
+            const orderButtons = document.querySelectorAll("button[data-order]");
+
+            orderButtons.forEach(function(button) {
+
+                    button.addEventListener("click", function(e) {
+                        const button = e.currentTarget;
+                        const container = button.parentNode;
+
+                        const order = {
+                            id: button.getAttribute("data-order"),
+                            title: container.querySelector(".title").innerText,
+                            price: container.querySelector(".price").innerText,
+                            desc: container.querySelector(".desc").innerText
+                        };
+
+                        localStorage.setItem ("order" , JSON.stringify(order));
+                    
+                        const url = window.location.href.replace("pies.html" , "order.html");
+                        window.location.href = url;
+                    });
+
+        });
+        });
+    </script>
 </html>
